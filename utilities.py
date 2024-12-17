@@ -292,14 +292,15 @@ class Engine:
     def allocate_buffers(self, shape_dict=None, device="cuda"):
         nvtx.range_push("allocate_buffers")
         for idx in range(self.engine.num_io_tensors):
+
             binding = self.engine[idx]
             if shape_dict and binding in shape_dict:
                 shape = shape_dict[binding].shape
             else:
-                shape = self.context.get_binding_shape(idx)
-            dtype = trt.nptype(self.engine.get_binding_dtype(binding))
-            if self.engine.binding_is_input(binding):
-                self.context.set_binding_shape(idx, shape)
+                shape = self.context.get_tensor_shape(binding)
+            dtype = trt.nptype(self.engine.get_tensor_dtype(binding))
+            if self.engine.get_tensor_mode(binding) == trt.TensorIOMode.INPUT:
+                self.context.set_input_shape(binding, shape)
             tensor = torch.empty(
                 tuple(shape), dtype=numpy_to_torch_dtype_dict[dtype]
             ).to(device=device)
@@ -324,8 +325,8 @@ class Engine:
     def __str__(self):
         out = ""
         for opt_profile in range(self.engine.num_optimization_profiles):
-            for binding_idx in range(self.engine.num_bindings):
-                name = self.engine.get_binding_name(binding_idx)
-                shape = self.engine.get_profile_shape(opt_profile, name)
+            for binding_idx in range(self.engine.num_io_tensors):
+                name = self.engine.get_tensor_name(binding_idx)
+                shape = self.engine.get_tensor_profile_shape(name, opt_profile)
                 out += f"\t{name} = {shape}\n"
         return out
