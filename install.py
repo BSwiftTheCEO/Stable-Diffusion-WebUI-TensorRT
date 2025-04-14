@@ -10,7 +10,7 @@ def install():
     from importlib_metadata import version
 
     if launch.is_installed("tensorrt"):
-        if not version("tensorrt") == "10.6.0":
+        if not version("tensorrt") == "10.9.0.34":
             launch.run(
                 ["python", "-m", "pip", "uninstall", "-y", "tensorrt"],
                 "removing old version of tensorrt",

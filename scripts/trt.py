@@ -205,8 +205,8 @@ class TensorRTScript(scripts.Script):
         loras = [net for net in extra_networks if net.startswith("lora")]
 
         # Avoid that extra networks will be loaded
-        for lora in loras:
-            _prompt = _prompt.replace(f"<{lora}>", "")
+        #for lora in loras:
+        #    _prompt = _prompt.replace(f"<{lora}>", "")
         p.prompt = _prompt
 
         # check if lora config has changes

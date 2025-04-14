@@ -214,12 +214,15 @@ class ProfilePrests:
             "768x768 - 1024x1024 | Batch Size 1-4": ProfileSettings(
                 1, 1, 4, 768, 1024, 1024, 768, 1024, 1024, 75, 75, 150
             ),
+            "256x256 - 2048x2048 | Batch Size 1-4": ProfileSettings(
+                1, 1, 4, 256, 512, 2048, 256, 512, 2048, 75, 75, 750
+            ),
         }
         self.default = ProfileSettings(
-            1, 1, 4, 512, 512, 768, 512, 512, 768, 75, 75, 150
+            1, 1, 4, 256, 512, 2048, 256, 512, 2048, 75, 75, 750
         )
         self.default_xl = ProfileSettings(
-            1, 1, 1, 1024, 1024, 1024, 1024, 1024, 1024, 75, 75, 75
+            1, 1, 1, 512, 1024, 2048, 512, 1024, 2048, 75, 75, 750
         )
 
     def get_settings_from_version(self, version: str):
