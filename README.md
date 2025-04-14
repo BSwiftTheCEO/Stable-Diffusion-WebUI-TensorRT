@@ -1,3 +1,7 @@
+## Using Dr. Furkan Gözükara's xformers
+pip install https://huggingface.co/MonsterMMORPG/SECourses_Premium_Flash_Attention/resolve/main/xformers-0.0.30+836cd905.d20250327-cp310-cp310-win_amd64.whl
+pip install --pre torch==2.7.0.dev20250311 torchvision torchaudio --index-url https://download.pytorch.org/whl/nightly/cu128
+
 # TensorRT Extension for Stable Diffusion
 
 This extension enables the best performance on NVIDIA RTX GPUs for Stable Diffusion with TensorRT.
